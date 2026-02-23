@@ -5,9 +5,6 @@
 To design and analyze a Common Source (CS) amplifier using LTSpice and perform DC, AC, and Transient analysis to extract parameters such as drain current, gain, bandwidth, and operating region.
 
 ---
-![WhatsApp Image 2026-02-23 at 2 09 31 PM](https://github.com/user-attachments/assets/5ad249f5-6d4e-45b7-ad0a-7af5e1c0097c)
-
-
 
 ## Introduction
 
@@ -21,6 +18,9 @@ In a CS amplifier:
 For proper amplification, the MOSFET must operate in the **saturation region**:
 
 VDS ≥ VGS - VTH
+
+![WhatsApp Image 2026-02-23 at 2 09 31 PM](https://github.com/user-attachments/assets/5ad249f5-6d4e-45b7-ad0a-7af5e1c0097c)
+
 
 ---
 
@@ -95,6 +95,8 @@ Low power case:
 W = 785nm  
 L = 800nm  
 
+![WhatsApp Image 2026-02-23 at 5 36 57 PM](https://github.com/user-attachments/assets/ae5d8ca3-0549-43cd-b3ed-16e568521eed)
+
 ---
 
 ## DC Analysis
@@ -104,19 +106,7 @@ L = 800nm
 - Increasing width increases current  
 - Channel length modulation observed  
 
----
-
-## Transfer Characteristics (ID vs VGS)
-
-Current starts flowing after threshold voltage.  
-ID increases as VGS increases following square-law behavior.
-
----
-
-## Drain Characteristics (ID vs VDS)
-
-Current becomes nearly constant in saturation region.  
-Slight slope due to channel length modulation.
+![Uploading WhatsApp Image 2026-02-23 at 5.38.41 PM.jpeg…]()
 
 ---
 
@@ -132,6 +122,8 @@ Observations:
 - 180° phase shift
 - Gain ≈ -2.6 (low power)
 - Gain ≈ 2.7–3.7 (moderate power)
+
+![WhatsApp Image 2026-02-23 at 5 37 39 PM](https://github.com/user-attachments/assets/b404c827-6b46-4a0b-b990-6d533e8889fb)
 
 ---
 
@@ -149,15 +141,7 @@ Results:
 - Bandwidth ≈ 1GHz (low power)
 - Bandwidth ≈ 22.23GHz (moderate power)
 
----
-
-## PMOS Active Load
-
-RD can be replaced by:
-1. Diode-connected PMOS  
-2. Biased PMOS  
-
-Biased PMOS provides higher gain and is preferred for IC implementation.
+![WhatsApp Image 2026-02-23 at 5 31 02 PM](https://github.com/user-attachments/assets/f69d51a8-e9e3-49c0-869d-17371f5f4384)
 
 ---
 
