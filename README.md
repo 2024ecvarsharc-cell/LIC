@@ -104,13 +104,9 @@ L = 800nm
 - ID matches design value  
 - MOSFET operates in saturation  
 - Increasing width increases current  
-- Channel length modulation observed  
+- Channel length modulation observed
 
-![Uploading WhatsApp Image 2026-02-23 at 5.38.41 PM.jpeg…]()
-![Uploading WhatsApp Image 2026-02-23 at 5.38.41 PM.jpeg…]()
-![Uploading WhatsApp Image 2026-02-23 at 5.38.41 PM.jpeg…]()
-![Uploading WhatsApp Image 2026-02-23 at 5.38.41 PM.jpeg…]()
-
+![WhatsApp Image 2026-02-23 at 5 38 41 PM](https://github.com/user-attachments/assets/63d9c606-4efd-47fa-94d7-0c6dd879494d)
 
 ---
 
