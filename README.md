@@ -50,15 +50,10 @@ VDS ≥ VGS - VTH
 
 P = V × I  
 
-For 50µW design:
+For P<=1.2mW design:
 
-I = 50µW / 1.8V  
-I ≈ 27.7µA  
-
-For 1.2mW design:
-
-I = 1.2mW / 2V  
-I = 0.6mA  
+I <= 1.2mW / 2V  
+I <= 0.6mA   
 
 Practical chosen ID ≈ 200µA  
 
@@ -66,11 +61,9 @@ Practical chosen ID ≈ 200µA
 
 ### 2. Drain Resistor
 
-For maximum symmetrical swing:
+Vout = VDD -(ID)(RD)
 
-Vout = VDD / 2  
-
-RD = VDD / (2 × ID)  
+RD = (VDD-Vout)/ID  
 
 For 2V design:
 
@@ -84,31 +77,20 @@ RD = 25kΩ
 
 ### 3. Width Selection
 
-ID = (1/2) kn (VGS − VTH)^2  
-
+ID = (1/2) kn'(W/L) (VGS − VTH)^2 
 VOV = 0.9 − 0.36 = 0.54V  
 
 Initial W ≈ 1.07µm  
-Adjusted W ≈ 1.377µm  
 
-Low power case:
-W = 785nm  
-L = 800nm  
+trial and error to get ID=200µA
+W = 1.50558µm  
+L = 180nm  
 
 ![WhatsApp Image 2026-02-23 at 5 36 57 PM](https://github.com/user-attachments/assets/ae5d8ca3-0549-43cd-b3ed-16e568521eed)
 
 ---
 
-## DC Analysis
 
-- ID matches design value  
-- MOSFET operates in saturation  
-- Increasing width increases current  
-- Channel length modulation observed
-
-![WhatsApp Image 2026-02-23 at 5 38 41 PM](https://github.com/user-attachments/assets/63d9c606-4efd-47fa-94d7-0c6dd879494d)
-
----
 
 ## Transient Analysis
 
@@ -118,10 +100,11 @@ Input:
 - Frequency = 1kHz
 
 Observations:
-- Output amplified
-- 180° phase shift
-- Gain ≈ -2.6 (low power)
-- Gain ≈ 2.7–3.7 (moderate power)
+- Output amplified and 180° phase shift
+practical
+- Gain= Vout/Vin
+- Gain=(1.02551-0.97416)/(0.909-0.8905)
+- Gain= 2.7756
 
 ![WhatsApp Image 2026-02-23 at 5 37 39 PM](https://github.com/user-attachments/assets/b404c827-6b46-4a0b-b990-6d533e8889fb)
 
@@ -136,12 +119,23 @@ Av = -gm RD
 gm = 2ID / VOV  
 
 Results:
-- Gain ≈ -2.6 (low power)
+- Gain ≈ -2.7756 (low power)
 - Gain ≈ 3.7 (moderate power)
 - Bandwidth ≈ 1GHz (low power)
 - Bandwidth ≈ 22.23GHz (moderate power)
 
 ![WhatsApp Image 2026-02-23 at 5 31 02 PM](https://github.com/user-attachments/assets/f69d51a8-e9e3-49c0-869d-17371f5f4384)
+
+---
+
+## DC Analysis
+
+- ID matches design value  
+- MOSFET operates in saturation  
+- Increasing width increases current  
+- Channel length modulation observed
+
+![WhatsApp Image 2026-02-23 at 5 38 41 PM](https://github.com/user-attachments/assets/63d9c606-4efd-47fa-94d7-0c6dd879494d)
 
 ---
 
