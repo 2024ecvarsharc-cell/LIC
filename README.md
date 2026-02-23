@@ -107,6 +107,10 @@ L = 800nm
 - Channel length modulation observed  
 
 ![Uploading WhatsApp Image 2026-02-23 at 5.38.41 PM.jpeg…]()
+![Uploading WhatsApp Image 2026-02-23 at 5.38.41 PM.jpeg…]()
+![Uploading WhatsApp Image 2026-02-23 at 5.38.41 PM.jpeg…]()
+![Uploading WhatsApp Image 2026-02-23 at 5.38.41 PM.jpeg…]()
+
 
 ---
 
