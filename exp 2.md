@@ -112,6 +112,9 @@ solving 5th eq v will gwt W as
 
 W=11.823µm
 
+<img width="1180" height="800" alt="image" src="https://github.com/user-attachments/assets/762d6243-a7de-4d27-9572-3ed8afbaafc5" />
+
+
 ---
 
 # DC Analysis
