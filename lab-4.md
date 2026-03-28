@@ -22,123 +22,142 @@
 
 ## DC Analysis  
 
-Under balanced conditions (Vin1 = Vin2), the tail current splits equally:
+### Tail Current Calculation (ISS)  
+
+The total power consumed by the differential amplifier is limited to 1.8 mW.
+
+```
+P = (VDD − VSS) × ISS
+```
+
+Substituting values:
+
+```
+1.8 × 10^-3 = 1.8 × ISS
+ISS = 1 × 10^-3 A = 1 mA
+```
+
+---
+
+### Current Distribution  
+
+Under balanced conditions:
 
 ```
 ID1 = ID2 = ISS / 2
+     = 1 mA / 2
+     = 0.5 mA
 ```
 
-Power relation:
+---
+
+### Output Voltage and Load Resistance  
 
 ```
-P = (VDD - VSS) × ISS
-```
-
-Output voltage:
-
-```
-Vout = VDD - (ID × RD)
-```
-
-```
-0 = 0.9 - (0.5mA × RD)
-RD = 1.8kΩ
+Vout = VDD − (ID × RD)
+0 = 0.9 − (0.5 mA × RD)
+RD = 1.8 kΩ
 ```
 
 ---
 
 ## NMOS Width Calculation  
 
-Oxide capacitance:
+### Oxide Capacitance  
 
 ```
 Cox = (εr × ε0) / tox
+     = (3.9 × 8.854 × 10^-12) / (4.1 × 10^-9)
+     = 8.42 × 10^-3 F/m²
 ```
 
-Overdrive voltage:
+---
+
+### Overdrive Voltage  
 
 ```
-Vov = VGS - VTH
+Vov = VGS − VTH
+     = 0.7 − 0.36
+     = 0.34 V
 ```
 
-Drain current equation:
+---
+
+### Width Calculation  
 
 ```
 ID = (1/2) μn Cox (W/L) (Vov)^2
 ```
 
-Width calculation:
-
 ```
 W = (2 × ID × L) / (μn Cox (Vov)^2)
-```
-
-Final value:
-
-```
-Wn ≈ 19.9 µm
+  ≈ 19.9 µm
 ```
 
 ---
 
 ## Input Common Mode Range (ICMR)  
 
-Maximum input:
+### Maximum Input  
 
 ```
-Vin(max) = VDD - (ID × RD) + VTH
+Vin(max) = VDD − (ID × RD) + VTH
+         = 0.9 − 0.9 + 0.36
+         = 0.36 V
 ```
-
-Minimum input:
-
-```
-Vin(min) = VSS + VDS(sat) + VGS
-```
-
-- Vin(max) = 0.36 V  
-- Vin(min) ≈ -0.9 V  
-
-✔ Range: **-0.9 V to 0.36 V**
 
 ---
 
-## Output Common Mode Limits  
+### Minimum Input  
 
 ```
-Voc(max) = VDD
+Vin(min) = VSS + VDS(sat) + VGS
+         = −0.9 + 0.2 + 0.7
+         ≈ 0 V
+```
+
+Operating range: −0.9 V to 0.36 V  
+
+---
+
+## Output Common Mode  
+
+```
+Voc(max) = VDD = 0.9 V
 ```
 
 ```
-Voc(min) = VDD - (ID × RD)
+Voc(min) = VDD − (ID × RD)
+         = 0 V
 ```
 
 ---
 
 ## Small Signal Gain  
 
-Transconductance:
+### Transconductance  
 
 ```
 gm = 2ID / Vov
+   = 2.94 mS
 ```
 
-Gain:
+---
+
+### Differential Gain  
 
 ```
-Ad = -gm × RD
+Ad = −gm × RD
+   = −5.29 V/V
 ```
 
-Output equation:
+---
+
+### Gain in dB  
 
 ```
-Vout1 - Vout2 = -gm × RD × Vid
-```
-
-Result:
-
-```
-Ad ≈ -5.29 V/V
-Gain ≈ 14.46 dB
+Gain = 20 log10(5.29)
+     ≈ 14.46 dB
 ```
 
 ---
@@ -147,53 +166,35 @@ Gain ≈ 14.46 dB
 
 ```
 Av = Vout(p-p) / Vin(p-p)
+   = 1204 / 200
+   = 6.02
 ```
 
 ```
-Gain(dB) = 20 log10(Av)
+Gain ≈ 15.59 dB
 ```
 
 ---
 
-## Differential Input Operation  
-
-### Linear Region  
+## Differential Input Condition  
 
 ```
-|Vid| < √2 × Vov
+√2 × Vov = 1.414 × 0.34 ≈ 0.48 V
 ```
 
-Current equations:
-
-```
-ID1 = (ISS / 2) + (gm × Vid / 2)
-ID2 = (ISS / 2) - (gm × Vid / 2)
-```
-
-✔ Both transistors ON  
-✔ Linear amplification  
-
----
-
-### Clipping Region  
-
-```
-|Vid| > √2 × Vov
-```
-
-✔ One transistor OFF  
-✔ Output clipped  
+- Linear: Vid < 0.48 V  
+- Clipping: Vid > 0.48 V  
 
 ---
 
 ## AC Analysis  
 
 ```
-BW = FH - FL
+BW = FH − FL = 7.21 Hz
 ```
 
 ```
-UGB = Gain × BW
+UGB = Gain × BW = 74.47
 ```
 
 ---
@@ -206,28 +207,12 @@ PMOS transistors act as active loads using a current mirror, improving gain and 
 
 ---
 
-## Design Specifications  
-
-- VDD = +0.9 V  
-- VSS = -0.9 V  
-- Power ≤ 1.8 mW  
-- Channel Length = 480 nm  
-- VinCM = 0 V  
-- VoCM = 0 V  
-- VP = -0.7 V  
-- CL = 10 pF  
-
----
-
 ## Power Analysis  
 
 ```
-P = (VDD - VSS) × ISS
-```
-
-```
-1.8V × ISS ≤ 1.8mW
-ISS = 1mA
+P = (VDD − VSS) × ISS
+  = 1.8 × ISS
+ISS = 1 mA
 ```
 
 ---
@@ -235,72 +220,52 @@ ISS = 1mA
 ## Current Distribution  
 
 ```
-ID1 = ID2 = ISS / 2 = 0.5mA
+ID1 = ID2 = 0.5 mA
 ```
 
 ---
 
-## Transistor Operation  
-
-Voltage relations:
+## Output Resistance  
 
 ```
-VGS = VG - VS
-```
-
-```
-VDS = VD - VS
+ro = 1 / (λ × ID)
+   = 20 kΩ
 ```
 
 ```
-VSD = VS - VD
+Rout = ro || ro
+     = 10 kΩ
 ```
 
-Saturation conditions:
+---
+
+## Transconductance  
 
 ```
-NMOS: VDS ≥ Vov
-PMOS: VSD ≥ Vov
+gm = 2ID / Vov
+   = 4.17 mS
 ```
 
 ---
 
 ## Theoretical Gain  
 
-Output resistance:
-
-```
-ro = 1 / (λ × ID)
-```
-
-Parallel resistance:
-
-```
-Rout = ron || rop
-```
-
-Transconductance:
-
-```
-gm = 2ID / Vov
-```
-
-Gain:
-
 ```
 Ad = gm × Rout
+   = 41.7 V/V
+```
+
+```
+Gain ≈ 32.4 dB
 ```
 
 ---
 
-## ICMR Range  
+## ICMR  
 
 ```
-VICM(min) = VS + VTH
-```
-
-```
-VICM(max) = VD + VTH
+VICM(min) = −0.34 V
+VICM(max) = 0.39 V
 ```
 
 ---
@@ -308,43 +273,32 @@ VICM(max) = VD + VTH
 ## Practical Gain  
 
 ```
-Av = Vout(p-p) / Vin(p-p)
-```
-
-```
-Gain(dB) = 20 log10(Av)
+Av = 1.88
+Gain ≈ 5.48 dB
 ```
 
 ---
 
-## Differential Input Condition  
+## Differential Input Limit  
 
 ```
-|Vid| < √2 × Vov
+√2 × Vov ≈ 0.34 V
 ```
-
-✔ Linear output  
-
----
-
-## Clipping Condition  
-
-```
-|Vid| > √2 × Vov
-```
-
-✔ Non-linear output  
 
 ---
 
 ## AC Analysis  
 
 ```
-BW = FH - FL
+BW = 3 GHz
 ```
 
 ```
-UGB = Gain × BW
+UGB = 7.44 GHz
 ```
 
 ---
+
+## Conclusion  
+
+The resistive load differential amplifier provides moderate gain, while the active load configuration significantly improves gain due to increased output resistance. Theoretical and practical results are reasonably close, validating the design.
