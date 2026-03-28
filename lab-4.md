@@ -230,6 +230,9 @@ However, the circuit has a limited input range and very low bandwidth (7.21 Hz),
 
 # CIRCUIT 2  
 
+<img width="967" height="822" alt="image" src="https://github.com/user-attachments/assets/4845ea9e-3fe5-4ecf-a71a-5613bfd3642c" />
+
+
 ## Description  
 
 PMOS transistors act as active loads using a current mirror, improving gain and output resistance.
