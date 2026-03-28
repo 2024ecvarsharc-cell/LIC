@@ -128,6 +128,17 @@ Operating range: −0.9 V to 0.36 V
 
 ---
 
+For linear amplification, input common-mode signal must stay between -0.9V and +0.36V.
+
+<img width="1281" height="1339" alt="image" src="https://github.com/user-attachments/assets/06acd803-1445-4497-ab80-153ba4b47cb8" />
+
+---
+
+if we increase the vin values then graph will be clipped( square form)
+
+<img width="1255" height="1311" alt="image" src="https://github.com/user-attachments/assets/2c0c6003-2fa6-42b1-bc26-6fbd8c22b9ec" />
+
+
 ## Output Common Mode  
 
 ```
@@ -195,6 +206,10 @@ Gain ≈ 15.59 dB
 
 ---
 
+<img width="1281" height="1339" alt="image" src="https://github.com/user-attachments/assets/336c2e00-c27b-4e55-8cc2-ab254a3adef3" />
+
+---
+
 ## AC Analysis  
 
 ```
@@ -204,6 +219,12 @@ BW = FH − FL = 7.21 Hz
 ```
 UGB = Gain × BW = 74.47
 ```
+
+##  Conclusion
+
+The differential amplifier satisfies the power constraint with ISS = 1 mA and operates properly in saturation. It achieves a moderate gain of around 14–15 dB with balanced current distribution.
+
+However, the circuit has a limited input range and very low bandwidth (7.21 Hz), resulting in poor high-frequency performance. Hence, while simple and power-efficient, it is not suitable for high-gain or high-speed applications.
 
 ---
 
