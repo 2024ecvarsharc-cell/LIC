@@ -1,249 +1,221 @@
-# DIFFERENTIAL AMPLIFIER  
-
-## CIRCUIT 1  
-
-### Aim:  
-**"Design and analysis of the MOS differential amplifier circuit for the following specifications."**  
+# FORMULAS USED IN DIFFERENTIAL AMPLIFIER
 
 ---
 
-## Given Specifications  
+## 1. DC ANALYSIS
 
-- Drain Supply Voltage (VDD): 0.9 V  
-- Source Supply Voltage (VSS): -0.9 V  
-- Maximum Power Dissipation: ≤ 1.8 mW  
-- Input Common Mode Voltage (VinCM): 0 V  
-- Output Common Mode Voltage (VoCM): 0 V  
-- Tail Node Voltage (VP): -0.7 V  
-- Load Capacitance (CL): 10 pF  
-- Channel Length: 480 nm  
-
----
-
-## DC Analysis  
-
-Under balanced conditions (Vin1 = Vin2), the tail current splits equally:
-
+### Current Distribution
 ```
 ID1 = ID2 = ISS / 2
 ```
 
-Given:  
-ISS = 1 mA → ID = 0.5 mA  
-
-Output voltage:
-
+### Output Voltage
 ```
-Vout = VDD - ID * RD
+Vout = VDD - (ID × RD)
 ```
 
+### Power Relation
 ```
-0 = 0.9 - (0.5mA * RD)
-RD = 1.8kΩ
+P = (VDD - VSS) × ISS
 ```
 
 ---
 
-## NMOS Width Calculation  
+## 2. OXIDE CAPACITANCE
 
 ```
-Cox = (εr * ε0) / tox
-Cox = 8.42 × 10^-3 F/m²
-```
-
-```
-Vov = VGS - VTH = 0.34V
-```
-
-```
-Wn ≈ 19.9 µm
+Cox = (εr × ε0) / tox
 ```
 
 ---
 
-## Input Common Mode Range (ICMR)  
-
-- Vin(max) = 0.36 V  
-- Vin(min) ≈ -0.9 V  
-
-✔ Operating range: **-0.9 V to 0.36 V**
-
----
-
-## Output Common Mode Limits  
-
-- Voc(max) = 0.9 V  
-- Voc(min) = 0 V  
-
----
-
-## Small Signal Gain  
+## 3. OVERDRIVE VOLTAGE
 
 ```
-Ad = -gm * RD
-```
-
-```
-gm = 2ID / Vov = 2.94 mS
-```
-
-```
-Ad ≈ -5.29 V/V
-Gain ≈ 14.46 dB
+Vov = VGS - VTH
 ```
 
 ---
 
-## Practical Gain  
-
-- Vin(p-p) = 200 mV  
-- Vout(p-p) = 1204 mV  
+## 4. MOSFET DRAIN CURRENT (SATURATION)
 
 ```
-Av = 1204 / 200 = 6.02
-Gain ≈ 15.59 dB
+ID = (1/2) μn Cox (W/L) (Vov)^2
 ```
 
----
-
-## Differential Input Operation  
-
-### Case 1: vid < √2 Vov  
-
-- Both transistors ON  
-- Linear amplification  
-- No distortion  
-
----
-
-### Case 2: vid > √2 Vov  
-
-- One transistor OFF  
-- Current fully steered  
-- Output clipped  
-
----
-
-## AC Analysis  
-
-- Gain ≈ 14.33 dB  
-- FL = 0 Hz  
-- FH = 7.21 Hz  
-- Bandwidth = 7.21 Hz  
-
+### Width Calculation
 ```
-UGB = Gain × BW = 74.47
+W = (2 × ID × L) / (μn Cox (Vov)^2)
 ```
 
 ---
 
-# CIRCUIT 2  
+## 5. INPUT COMMON MODE RANGE (ICMR)
 
-## Description  
-
-PMOS transistors act as active loads using a current mirror, increasing gain and output resistance.
-
----
-
-## Design Specifications  
-
-- VDD = +0.9 V  
-- VSS = -0.9 V  
-- Power ≤ 1.8 mW  
-- Channel Length = 480 nm  
-- VinCM = 0 V  
-- VoCM = 0 V  
-- VP = -0.7 V  
-- CL = 10 pF  
-
----
-
-## Power Analysis  
-
+### Maximum Input Voltage
 ```
-P = (VDD - VSS) * ISS
+Vin(max) = VDD - (ID × RD) + VTH
 ```
 
+### Minimum Input Voltage
 ```
-1.8V * ISS ≤ 1.8mW
-ISS = 1mA
+Vin(min) = VSS + VDS(sat) + VGS
 ```
 
 ---
 
-## Current Distribution  
+## 6. OUTPUT COMMON MODE VOLTAGE
 
+### Maximum Output
 ```
-ID1 = ID2 = 0.5mA
-```
-
----
-
-## Transistor Operation  
-
-- PMOS in saturation  
-- NMOS in saturation  
-- Tail transistor acts as constant current source  
-
----
-
-## Theoretical Gain  
-
-```
-ro = 20kΩ
-Rout = 10kΩ
-gm = 4.17 mS
+Voc(max) = VDD
 ```
 
+### Minimum Output
 ```
-Ad = 41.7 V/V ≈ 32.4 dB
+Voc(min) = VDD - (ID × RD)
 ```
 
 ---
 
-## ICMR Range  
-
-- VICM(min) = -0.34 V  
-- VICM(max) = 0.39 V  
-
----
-
-## Practical Gain  
-
-- Vin(p-p) = 10 mV  
-- Vout(p-p) = 18.84 mV  
+## 7. TRANSCONDUCTANCE
 
 ```
-Av = 1.88
-Gain = 5.48 dB
+gm = 2ID / Vov
+```
+
+OR
+
+```
+gm = √(2 μn Cox (W/L) ID)
 ```
 
 ---
 
-## Differential Input Condition  
+## 8. DIFFERENTIAL GAIN
 
+### Resistive Load
 ```
-|Vid| < √2 Vov = 0.34V
+Ad = -gm × RD
 ```
 
-✔ Output remains linear  
+### Active Load
+```
+Ad = gm × Rout
+```
 
 ---
 
-## Clipping Condition  
+## 9. OUTPUT RESISTANCE
 
-- Current shifts to one branch  
-- Output becomes distorted  
+```
+ro = 1 / (λ × ID)
+```
+
+### Parallel Resistance
+```
+Rout = ron || rop
+```
 
 ---
 
-## AC Analysis  
-
-- Gain = 5.48 dB  
-- FL = 0 Hz  
-- FH = 3 GHz  
+## 10. GAIN IN DECIBELS
 
 ```
-Bandwidth = 3 GHz
-UGB = 7.44 GHz
+Gain(dB) = 20 log10(Av)
 ```
+
+---
+
+## 11. PRACTICAL GAIN
+
+```
+Av = Vout(p-p) / Vin(p-p)
+```
+
+---
+
+## 12. DIFFERENTIAL INPUT CONDITION
+
+### Linear Region
+```
+|Vid| < √2 × Vov
+```
+
+### Saturation (Clipping)
+```
+|Vid| > √2 × Vov
+```
+
+---
+
+## 13. CURRENT STEERING
+
+```
+ID1 = (ISS / 2) + (gm × Vid / 2)
+ID2 = (ISS / 2) - (gm × Vid / 2)
+```
+
+---
+
+## 14. BANDWIDTH
+
+```
+BW = FH - FL
+```
+
+---
+
+## 15. UNITY GAIN BANDWIDTH
+
+```
+UGB = Gain × Bandwidth
+```
+
+---
+
+## 16. SMALL SIGNAL OUTPUT
+
+```
+Vout1 - Vout2 = -gm × RD × Vid
+```
+
+---
+
+## 17. SATURATION CONDITION
+
+### NMOS
+```
+VDS ≥ Vov
+```
+
+### PMOS
+```
+VSD ≥ Vov
+```
+
+---
+
+## 18. GATE-SOURCE VOLTAGE
+
+```
+VGS = VG - VS
+```
+
+---
+
+## 19. DRAIN-SOURCE VOLTAGE
+
+```
+VDS = VD - VS
+```
+
+---
+
+## 20. SOURCE-DRAIN VOLTAGE (PMOS)
+
+```
+VSD = VS - VD
+```
+
+---
