@@ -228,106 +228,151 @@ However, the circuit has a limited input range and very low bandwidth (7.21 Hz),
 
 ---
 
-# CIRCUIT 2  
-
-<img width="967" height="822" alt="image" src="https://github.com/user-attachments/assets/4845ea9e-3fe5-4ecf-a71a-5613bfd3642c" />
-
-
-## Description  
-
-PMOS transistors act as active loads using a current mirror, improving gain and output resistance.
+# CIRCUIT 2 – Differential Amplifier with Active Load
 
 ---
 
-## Power Analysis  
+<img width="1187" height="853" alt="image" src="https://github.com/user-attachments/assets/5787bd37-91bf-4d03-aaa5-0db31fa9399d" />
 
-```
-P = (VDD − VSS) × ISS
-  = 1.8 × ISS
-ISS = 1 mA
-```
 
 ---
 
-## Current Distribution  
+## DC Analysis
 
-```
-ID1 = ID2 = 0.5 mA
-```
+### Tail Current Calculation (ISS)
 
----
+The total power consumption is limited to **1.8 mW**.
 
-## Output Resistance  
+P = (VDD − VSS) × ISS  
 
-```
-ro = 1 / (λ × ID)
-   = 20 kΩ
-```
+1.8 × 10^-3 = 1.8 × ISS  
 
-```
-Rout = ro || ro
-     = 10 kΩ
-```
+ISS = 1 mA  
 
 ---
 
-## Transconductance  
+### Current Distribution
 
-```
-gm = 2ID / Vov
-   = 4.17 mS
-```
+Under balanced conditions:
 
----
-
-## Theoretical Gain  
-
-```
-Ad = gm × Rout
-   = 41.7 V/V
-```
-
-```
-Gain ≈ 32.4 dB
-```
+ID1 = ID2 = ISS / 2  
+     = 1 mA / 2  
+     = 0.5 mA  
 
 ---
 
-## ICMR  
+### Output Resistance
 
-```
-VICM(min) = −0.34 V
-VICM(max) = 0.39 V
-```
+ro = 1 / (λ × ID)  
+   = 1 / (0.1 × 0.5 × 10^-3)  
+   = 20 kΩ  
 
----
-
-## Practical Gain  
-
-```
-Av = 1.88
-Gain ≈ 5.48 dB
-```
+Rout = ro || ro  
+     = 10 kΩ  
 
 ---
 
-## Differential Input Limit  
+<img width="846" height="633" alt="image" src="https://github.com/user-attachments/assets/99d41676-1e90-4937-9718-35115be1318f" />
 
-```
-√2 × Vov ≈ 0.34 V
-```
+<img width="853" height="209" alt="image" src="https://github.com/user-attachments/assets/da5120e5-1458-40af-9473-5ed6df8b4cfd" />
 
 ---
 
-## AC Analysis  
+### Output Voltage and Load Behavior
 
-```
-BW = 3 GHz
-```
+PMOS transistors act as **active loads (current mirror)** instead of resistors.
 
-```
-UGB = 7.44 GHz
-```
+- Provides high output resistance  
+- Improves voltage gain  
+- Converts differential output to single-ended output  
+- Suitable for integrated circuit implementation  
+
+---
+
+### Transconductance (gm)
+
+gm = 2ID / Vov  
+   = (2 × 0.5 mA) / 0.24  
+   = 4.17 mS  
+
+---
+
+## Small Signal Gain
+
+### Differential Gain
+
+Ad = gm × Rout  
+   = 4.17 mS × 10 kΩ  
+   = 41.7 V/V  
+
+---
+
+<img width="958" height="848" alt="image" src="https://github.com/user-attachments/assets/c1e506e7-9fd0-430f-b69b-d2f02ce370b2" />
+
+---
+
+### Gain in dB
+
+Gain = 20 log10(41.7)  
+     ≈ 32.4 dB  
+
+---
+
+### Practical Gain
+
+Av = 1.88  
+
+Gain ≈ 5.48 dB  
+
+> Note: Practical gain is lower due to non-ideal effects such as channel length modulation, parasitic capacitances, and current mirror mismatch.
+
+---
+
+## Input Common Mode Range (ICMR)
+
+VICM(min) = −0.34 V  
+VICM(max) = 0.39 V  
+
+Operating range: **−0.34 V to 0.39 V**
+
+---
+
+## Differential Input Condition
+
+√2 × Vov ≈ 0.34 V  
+
+- Linear Region: Vid < 0.34 V  
+- Clipping Region: Vid > 0.34 V  
+
+---
+
+## Output Common Mode
+
+Voc(max) ≈ VDD = 0.9 V  
+
+Voc(min) ≈ limited by saturation conditions  
+
+---
+
+<img width="1264" height="1009" alt="image" src="https://github.com/user-attachments/assets/fc32ac50-43fe-40c3-8e87-a9c92748f8bd" />
+
+
+---
+
+## AC Analysis
+
+BW = 3 GHz  
+
+UGB = Gain × BW  
+    = 7.44 GHz  
+
+---
+
+<img width="959" height="849" alt="image" src="https://github.com/user-attachments/assets/2e0a4bd7-020d-4e8e-ad86-a656d9434edb" />
+
+
+<img width="960" height="845" alt="image" src="https://github.com/user-attachments/assets/381daee8-950f-4b30-9abc-dd3482c9ece8" />
+
 
 ---
 
@@ -335,64 +380,73 @@ UGB = 7.44 GHz
 
 The resistive load differential amplifier provides moderate gain, while the active load configuration significantly improves gain due to increased output resistance. Theoretical and practical results are reasonably close, validating the design.
 
-# CIRCUIT 3
+# CIRCUIT 3 – Differential Amplifier with Active Load and Tail Current Source
+
+<img width="825" height="653" alt="image" src="https://github.com/user-attachments/assets/7a18eabd-8ddf-4669-a780-2702dbf11e46" />
 
 ---
 
-## 3.1 Power Constraint Analysis
+## DC Analysis
 
-**Supply Voltage Differential:**
+### Power Constraint Analysis
 
-VDD - VSS = 0.9 - (-0.9) = 1.8 V  
+Supply voltage difference:
 
-**Power Equation:**
+VDD − VSS = 0.9 − (−0.9) = 1.8 V  
 
-P = (VDD - VSS) × ISS  
+Power equation:
+
+P = (VDD − VSS) × ISS  
 
 1.8 × ISS ≤ 1.8 × 10^-3  
 
 ISS ≤ 1 mA  
 
-**Design Choice:**
+Design choice:
 
 ISS = 1 mA  
 
-Power Dissipation = 1.8 mW  (Constraint satisfied)
+Power Dissipation = 1.8 mW (Constraint satisfied)  
 
 ---
 
-## 3.2 Drain Current Calculation (ID)
+### Current Distribution
 
 Under balanced condition:
 
 ID1 = ID2 = ISS / 2  
-ID1 = ID2 = 0.5 mA  
+     = 1 mA / 2  
+     = 0.5 mA  
 
 ---
 
-## 3.3 Drain-Source Voltage (VDS)
+### Drain-Source Voltage (VDS)
 
 VD = 0 V  
-VP = -0.7 V  
+VP = −0.7 V  
 
-VDS = VD - VP  
-VDS = 0 - (-0.7) = 0.7 V  
+VDS = VD − VP  
+     = 0 − (−0.7)  
+     = 0.7 V  
 
 ---
 
-## 3.4 Gate-Source and Overdrive Voltage
+### Gate-Source and Overdrive Voltage
 
 VG = 0 V  
-VS = -0.7 V  
+VS = −0.7 V  
 
-VGS = VG - VS = 0 - (-0.7) = 0.7 V  
+VGS = VG − VS  
+     = 0 − (−0.7)  
+     = 0.7 V  
 
-VOV = VGS - VTH  
-VOV = 0.7 - 0.36 = 0.34 V  
+VOV = VGS − VTH  
+     = 0.7 − 0.36  
+     = 0.34 V  
 
 ---
 
-## 3.5 Saturation Region Verification
+### Saturation Region Verification
 
 Condition:
 
@@ -400,45 +454,56 @@ VDS > VOV
 
 0.7 > 0.34  
 
-→ Transistors are in **saturation region**
+→ Transistors operate in saturation region  
 
 ---
 
-## 3.6 Tail Current Source Analysis (M5)
+### Tail Current Source Analysis (M5)
 
-VDS5 = -0.7 - (-0.9) = 0.2 V  
+VDS5 = −0.7 − (−0.9)  
+     = 0.2 V  
 
 VOV5 = 0.2 V  
 
 VGS5 = VTH + VOV5  
-VGS5 = 0.36 + 0.2 = 0.56 V  
+     = 0.36 + 0.2  
+     = 0.56 V  
 
 VG5 = VGS5 + VS  
-VG5 = 0.56 - 0.9 = -0.34 V  
+     = 0.56 − 0.9  
+     = −0.34 V  
 
 ---
 
-## 3.7 Tail Transistor Width (W5)
+### Transistor Sizing
 
-W5 = (2 × ID × L) / (μnCox × VOV²)
+#### Tail Transistor Width (W5)
+
+W5 = (2 × ID × L) / (μnCox × VOV²)  
 
 W5 ≈ 104 µm  
 
 ---
 
-## 3.8 NMOS Width (W1, W2)
+#### NMOS Width (W1, W2)
 
 W1 = W2 ≈ 18 µm  
 
 ---
 
-## 3.9 PMOS Active Load Width (W3, W4)
+#### PMOS Active Load Width (W3, W4)
 
 W3 = W4 ≈ 44.8 µm  
 
 ---
 
-## 3.10 Final Design Values (Simulation)
+<img width="858" height="622" alt="image" src="https://github.com/user-attachments/assets/531b00d5-b99f-48ce-908c-5c58dc0e45fa" />
+
+<img width="851" height="292" alt="image" src="https://github.com/user-attachments/assets/3f375a67-08b7-401a-9f9d-9a568ef6f60e" />
+
+---
+
+### Final Design Values (Simulation)
 
 W(M1, M2) ≈ 22 µm  
 W(M5) ≈ 194 µm  
@@ -449,12 +514,12 @@ ISS = 1 mA
 
 ---
 
-## 3.11 Small Signal Analysis
+## Small Signal Analysis
 
 ### Transconductance (gm)
 
 gm = 2ID / VOV  
-gm = (2 × 0.5 mA) / 0.34  
+   = (2 × 0.5 mA) / 0.34  
 
 gm ≈ 2.94 mS  
 
@@ -462,21 +527,22 @@ gm ≈ 2.94 mS
 
 ### Output Resistance (ro)
 
-Assuming λ ≈ 0.04  
+ro ≈ 1 / (λ × ID)  
+   = 1 / (0.04 × 0.5 × 10^-3)  
 
-ro ≈ 1 / (λID) ≈ 50 kΩ  
+ro ≈ 50 kΩ  
 
-Rout = ron || rop ≈ 25 kΩ  
+Rout = ron || rop  
+     ≈ 25 kΩ  
 
 ---
 
 ### Differential Gain
 
-Ad = -gm × Rout  
+Ad = −gm × Rout  
+   = −2.94 mS × 25 kΩ  
 
-Ad = -2.94 mS × 25 kΩ  
-
-Ad ≈ -73.5 V/V  
+Ad ≈ −73.5 V/V  
 
 ---
 
@@ -488,35 +554,38 @@ Gain ≈ 37.3 dB
 
 ---
 
-## 3.12 Output Voltage Swing
+## Output Voltage Swing
 
-Vout(max) ≈ 0.9 - 0.3 = 0.6 V  
-Vout(min) ≈ -0.9 + 0.3 = -0.6 V  
+Vout(max) ≈ 0.9 − 0.3 = 0.6 V  
+
+Vout(min) ≈ −0.9 + 0.3 = −0.6 V  
 
 ---
 
-## 3.13 Input Common Mode Range (ICMR)
+## Input Common Mode Range (ICMR)
 
 Vin(max) ≈ 0.9 V  
 
-Vin(min) = -0.9 + 0.2 + 0.7 = 0 V  
+Vin(min) = −0.9 + 0.2 + 0.7  
+         = 0 V  
 
-ICMR: 0 V to 0.9 V  
+Operating range: **0 V to 0.9 V**  
 
 ---
 
-## 3.14 Differential Input Limit
+## Differential Input Condition
 
 Vid(max) = √2 × VOV  
+         = 1.414 × 0.34  
+         ≈ 0.48 V  
 
-Vid(max) = 1.414 × 0.34 = 0.48 V  
+- Linear Region: Vid < 0.48 V  
+- Clipping Region: Vid > 0.48 V  
 
-- Linear: Vid < 0.48 V  
-- Clipping: Vid > 0.48 V  
 
 ---
 
-## 3.15 AC Analysis
+## AC Analysis
 
 ### Bandwidth
 
@@ -525,6 +594,12 @@ BW = 1 / (2π × Rout × CL)
 BW = 1 / (2π × 25k × 10pF)  
 
 BW ≈ 636 Hz  
+
+---
+
+<img width="960" height="846" alt="image" src="https://github.com/user-attachments/assets/7896a709-ba9c-49ce-a4dd-b3275005ce36" />
+
+<img width="958" height="848" alt="image" src="https://github.com/user-attachments/assets/4f5bd447-ec81-4fec-ab19-20a777fff7cb" />
 
 ---
 
@@ -538,12 +613,18 @@ UGB ≈ 46.7 kHz
 
 ---
 
-## 3.16 Transient Analysis
+## Transient Analysis
 
-- Differential input applied (180° phase shift)
-- Outputs are **equal and opposite**
-- Symmetrical waveform about 0 V
-- No distortion if Vid < 0.48 V  
+- Differential input applied with 180° phase shift  
+- Outputs are equal and opposite  
+- Waveform is symmetrical about 0 V  
+- No distortion when Vid < 0.48 V
+
+---
+
+<img width="1282" height="1289" alt="image" src="https://github.com/user-attachments/assets/9ccb0d8c-ff0b-4d57-8691-c11b2f34805e" />
+
+<img width="1280" height="1366" alt="image" src="https://github.com/user-attachments/assets/3da42f81-0c34-4326-a454-f9966b197e21" />
 
 ---
 
