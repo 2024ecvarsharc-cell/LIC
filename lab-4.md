@@ -22,6 +22,9 @@
 ## CIRCUIT 1  
 
 
+<img width="2220" height="1246" alt="image" src="https://github.com/user-attachments/assets/a35f54ab-1f84-461a-9a05-20f883b1ca53" />
+
+
 ## DC Analysis  
 
 ### Tail Current Calculation (ISS)  
@@ -95,6 +98,9 @@ ID = (1/2) μn Cox (W/L) (Vov)^2
 W = (2 × ID × L) / (μn Cox (Vov)^2)
   ≈ 19.9 µm
 ```
+
+![WhatsApp Image 2026-03-28 at 11 42 19 PM (1)](https://github.com/user-attachments/assets/a92d274b-5ba7-4667-87c7-062cde330c7f)
+
 
 ---
 
@@ -327,7 +333,7 @@ ISS ≤ 1 mA
 
 ISS = 1 mA  
 
-Power Dissipation = 1.8 mW ✅ (Constraint satisfied)
+Power Dissipation = 1.8 mW  (Constraint satisfied)
 
 ---
 
@@ -368,7 +374,7 @@ Condition:
 
 VDS > VOV  
 
-0.7 > 0.34 ✅  
+0.7 > 0.34  
 
 → Transistors are in **saturation region**
 
@@ -517,7 +523,7 @@ UGB ≈ 46.7 kHz
 
 ---
 
-## ✅ Conclusion
+##  Conclusion
 
 - High gain due to **PMOS active load (~37 dB)**
 - Power constraint satisfied (**1.8 mW**)
