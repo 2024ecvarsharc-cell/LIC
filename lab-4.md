@@ -1,6 +1,5 @@
 # DIFFERENTIAL AMPLIFIER  
 
-## CIRCUIT 1  
 
 ### Aim:  
 **"Design and analysis of the MOS differential amplifier circuit for the following specifications."**  
@@ -19,6 +18,9 @@
 - Channel Length: 480 nm  
 
 ---
+
+## CIRCUIT 1  
+
 
 ## DC Analysis  
 
