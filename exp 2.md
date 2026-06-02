@@ -539,3 +539,188 @@ The cascode structure improves frequency response and provides stable operation 
 
 ---
 
+
+## Simulation Protocols
+
+### 1. DC Analysis
+
+#### Objective
+
+Verify the structural DC operating point parameters to guarantee every active MOS device is biased safely inside the saturation region.
+
+#### Procedure
+
+1. Construct the complete multi-terminal Common Source (CS) amplifier architecture inside the design environment.
+2. Setup the supply network with:
+
+   * VDD = 1.2 V
+   * VG1 = 0.866 V
+   * VG2 = 0.566 V
+   * VG3 = 0.61 V
+3. Include the operating-point simulation directive:
+
+   ```spice
+   .op
+   ```
+4. Execute the simulation and verify:
+
+   * Node voltages
+   * Drain current flow
+   * Saturation region operation
+   * Target current:
+
+   ```text
+   ID ≈ 200 µA
+   ```
+
+---
+
+### 2. Transient Analysis
+
+#### Objective
+
+Track time-domain dynamic properties, verify signal path stability, and measure peak-to-peak output signal amplification.
+
+#### Procedure
+
+1. Apply a small-signal sinusoidal input source:
+
+   ```spice
+   SINE(0.866 10m 1k)
+   ```
+
+2. Add the transient simulation directive:
+
+   ```spice
+   .trans 0 5m 0 1u
+   ```
+
+3. Run the simulation and observe:
+
+   * Input waveform
+   * Output waveform
+   * Peak-to-peak voltage swing
+   * Signal amplification characteristics
+
+4. Extract:
+
+   * Vin(p-p)
+   * Vout(p-p)
+
+---
+
+### 3. AC Frequency Sweep
+
+#### Objective
+
+Characterize the amplifier frequency response, determine midband gain, and identify upper cutoff frequency characteristics.
+
+#### Procedure
+
+1. Configure the input source for AC small-signal analysis:
+
+   ```spice
+   AC 1
+   ```
+
+2. Define logarithmic frequency sweep limits:
+
+   ```spice
+   .ac dec 100 10 100G
+   ```
+
+3. Probe the output node and evaluate:
+
+   * Voltage gain in dB
+   * Frequency response
+   * Phase response
+   * Bandwidth
+   * Upper cutoff frequency
+
+4. Determine the upper cutoff frequency at the:
+
+   ```text
+   -3 dB
+   ```
+
+   attenuation point.
+
+---
+
+# Results
+
+| Metric                          | Theoretical Value (Ideal) | Simulated Value (BSIM) |
+| :------------------------------ | :------------------------ | :--------------------- |
+| Drain Current (ID)              | 200 µA                    | 200 µA                 |
+| Quiescent Output Voltage (Vout) | 0.6 V                     | 0.6 V                  |
+| Voltage Gain (Av)               | -0.45 V/V (-6.935 dB)     | 2.094 V/V (6.42 dB)    |
+| Upper Cutoff Frequency (fH)     | —                         | 138.181 MHz            |
+| Total Bandwidth (BW)            | —                         | 138.151 MHz            |
+
+---
+
+# Inference
+
+### Operating Mode Validation
+
+Simulation results confirm that all MOS transistors (M1, M2, and M3) remain properly biased in the saturation region throughout nominal operation.
+
+### Power Verification
+
+The total power dissipation is:
+
+```text
+P = 0.24 mW
+```
+
+which satisfies the specified power constraint:
+
+```text
+P ≤ 0.4 mW
+```
+
+### Gain Variance Analysis
+
+The ideal hand calculations predict a lower gain value:
+
+```text
+-6.935 dB
+```
+
+whereas BSIM simulation produces:
+
+```text
+6.42 dB
+```
+
+This deviation occurs because ideal square-law equations overestimate the source degeneration term:
+
+```text
+(1 + gmro2)
+```
+
+In practical short-channel CMOS devices, effects such as:
+
+* Velocity saturation
+* Drain Induced Barrier Lowering (DIBL)
+* Channel-length modulation
+
+reduce the effective output resistance of transistor M2, thereby lowering degeneration and increasing the achievable gain.
+
+### Frequency Response Characteristics
+
+With the output node dominated by the:
+
+```text
+0.5 pF
+```
+
+load capacitor, the amplifier behaves as a stable low-pass system exhibiting bandwidth preservation up to approximately:
+
+```text
+138 MHz
+```
+
+The circuit therefore demonstrates strong high-frequency performance suitable for moderate-speed analog signal processing applications.
+
+
