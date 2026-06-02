@@ -698,3 +698,548 @@ The circuit therefore demonstrates strong high-frequency performance suitable fo
 
 ---
 
+c)
+
+---
+
+
+# Design and Analysis of MOSFET Amplifier Configurations Using 180 nm CMOS Technology
+
+This repository contains the theoretical design calculations, operating point verification, and LTspice simulation analysis of MOSFET amplifier configurations implemented using 180 nm CMOS technology.
+
+---
+
+# Aim
+
+To design and simulate MOSFET amplifier configurations using 180 nm CMOS technology in LTspice, perform DC, transient, and AC analyses, and compare gain, bandwidth, power consumption, and overall amplifier performance.
+
+---
+
+# Given Specifications
+
+| Parameter                       | Value             |
+| :------------------------------ | :---------------- |
+| Supply Voltage (VDD)            | 1.2 V             |
+| Drain Current (ID)              | 200 µA            |
+| Overdrive Voltage (VOV)         | 0.2 V             |
+| Load Capacitance (CL)           | 0.5 pF            |
+| Channel Length (Ln, Lp)         | 180 nm            |
+| Maximum Power                   | ≤ 0.4 mW          |
+| Relative Permittivity (εr)      | 3.9               |
+| Permittivity of Free Space (ε0) | 8.854 × 10⁻¹² F/m |
+| Oxide Thickness (tox)           | 4.1 × 10⁻⁹ m      |
+| Electron Mobility (μn)          | 273.809 cm²/Vs    |
+| Hole Mobility (μp)              | 115.689 cm²/Vs    |
+
+---
+
+# Circuit Configuration
+
+Circuit Used: Circuit 2C
+
+---
+
+# Design Calculations
+
+## 1. NMOS Gate Voltage Calculation
+
+Given:
+
+```text
+VOV = 0.2 V
+```
+
+Using:
+
+```text
+VOV = VGS − VTH
+```
+
+Therefore:
+
+```text
+VGS = VOV + VTH
+```
+
+Substituting:
+
+```text
+VGS = 0.2 + 0.36
+VGS = 0.56 V
+```
+
+For transistor M2:
+
+```text
+VS = 0
+VG = 0.56 V
+```
+
+---
+
+## 2. Input Transistor Biasing (M1)
+
+Since:
+
+```text
+VG = VD (fixed biasing)
+```
+
+Using:
+
+```text
+VGS = VTH + VOV
+```
+
+Therefore:
+
+```text
+VGS = 0.36 + 0.2
+VGS = 0.56 V
+```
+
+Source voltage of M1 equals drain voltage of M2:
+
+```text
+VS = 0.56 V
+```
+
+Hence:
+
+```text
+VG = VS + VGS
+VG = 0.56 + 0.56
+VG = 1.12 V
+```
+
+---
+
+## 3. PMOS Load Biasing (M3)
+
+Using:
+
+```text
+VSG = |VTH| + VOV
+```
+
+Substituting:
+
+```text
+VSG = 0.39 + 0.2
+VSG = 0.59 V
+```
+
+Given:
+
+```text
+VS = VDD = 1.2 V
+```
+
+Therefore:
+
+```text
+VG = 1.2 − 0.59
+VG = 0.61 V
+```
+
+---
+<img width="1193" height="713" alt="Screenshot 2026-06-02 091332" src="https://github.com/user-attachments/assets/d1f0ced9-3b9d-4928-b8bf-30af7725d90d" />
+---
+
+# Region of Operation Verification
+
+## M1 – Amplifying NMOS
+
+Given:
+
+```text
+Source Voltage = 0.556 V
+Gate Voltage = 1.12 V
+```
+
+Calculation:
+
+```text
+VGS1 = 1.12 − 0.556
+VGS1 = 0.564 V
+```
+
+Overdrive:
+
+```text
+VOV1 = VGS1 − VTN
+VOV1 = 0.564 − 0.36
+VOV1 = 0.204 V
+```
+
+Drain-to-source voltage:
+
+```text
+VDS1 = 0.882 − 0.556
+VDS1 = 0.326 V
+```
+
+Condition:
+
+```text
+VDS1 > VOV1
+0.326 > 0.204
+```
+
+Result:
+
+```text
+M1 operates in saturation region
+```
+
+---
+
+## M2 – Diode Connected NMOS
+
+For diode connection:
+
+```text
+VDS2 = VGS2
+```
+
+Given:
+
+```text
+VGS2 = 0.556 V
+```
+
+Check:
+
+```text
+VGS2 − VTN = 0.556 − 0.36
+= 0.196 V
+```
+
+Condition:
+
+```text
+VDS2 > VOV2
+0.556 > 0.196
+```
+
+Result:
+
+```text
+M2 operates in saturation region
+```
+
+---
+
+## M3 – PMOS Load
+
+Given:
+
+```text
+Source = 1.2 V
+Gate = 0.61 V
+Drain = 0.882 V
+```
+
+Calculation:
+
+```text
+VSG3 = 1.2 − 0.61
+VSG3 = 0.59 V
+```
+
+Overdrive:
+
+```text
+VOV3 = 0.59 − 0.39
+VOV3 = 0.20 V
+```
+
+Drain-to-source voltage:
+
+```text
+VSD3 = 1.2 − 0.882
+VSD3 = 0.318 V
+```
+
+Condition:
+
+```text
+VSD3 > VOV3
+0.318 > 0.20
+```
+
+Result:
+
+```text
+M3 operates in saturation region
+```
+
+---
+
+# Output Voltage Swing
+
+## Maximum Output Voltage
+
+Upper limit occurs when PMOS transistor M3 leaves saturation.
+
+Condition:
+
+```text
+VSD3 ≥ VOVp
+```
+
+Using:
+
+```text
+VSD3 = VDD − Vout
+```
+
+At boundary:
+
+```text
+Vout,max = VDD − VOVp
+Vout,max = 1.2 − 0.20
+Vout,max = 1.0 V
+```
+
+---
+
+## Minimum Output Voltage
+
+Lower limit occurs when NMOS transistor M1 leaves saturation.
+
+Condition:
+
+```text
+VDS1 ≥ VOVn
+```
+
+Using:
+
+```text
+VDS1 = Vout − VS
+```
+
+At boundary:
+
+```text
+Vout,min = VS + VOVn
+Vout,min = 0.556 + 0.20
+Vout,min = 0.756 V
+```
+
+---
+
+# Symmetry Check
+
+Quiescent output voltage:
+
+```text
+Vout,Q = 0.882 V
+```
+
+Upper swing:
+
+```text
+1.0 − 0.882 = 0.118 V
+```
+
+Lower swing:
+
+```text
+0.882 − 0.756 = 0.126 V
+```
+
+The amplifier output swing is approximately symmetrical.
+
+---
+
+# MOSFET Width Calculations
+
+Using:
+
+```text
+ID = (1/2) μ Cox (W/L) VOV²
+```
+
+Rearranging:
+
+```text
+W = (2 ID L) / (μ Cox VOV²)
+```
+
+---
+
+## NMOS Width Calculation
+
+Substituting:
+
+```text
+Wn = (2 × 200×10⁻⁶ × 0.18×10⁻⁶)
+     /
+     (0.02738 × 8.42×10⁻³ × (0.2)²)
+```
+
+Result:
+
+```text
+Wn ≈ 7.8 µm
+```
+
+Practical optimized value from simulation:
+
+```text
+Wn = 33.567 µm
+```
+
+---
+
+## PMOS Width Calculation
+
+Substituting:
+
+```text
+Wp = (2 × 200×10⁻⁶ × 0.18×10⁻⁶)
+     /
+     (0.01157 × 8.42×10⁻³ × (0.2)²)
+```
+
+Result:
+
+```text
+Wp ≈ 18 µm
+```
+
+Observed behavior:
+
+```text
+At Wp = 18 µm, drain current ≈ 120 µA
+```
+
+To achieve:
+
+```text
+ID ≈ 200 µA
+```
+
+Optimized simulation value:
+
+```text
+Wp = 49.6 µm
+```
+
+---
+
+# Simulation Protocols
+
+## 1. DC Analysis
+
+### Objective
+
+Verify DC operating point and saturation region biasing.
+
+### Procedure
+
+1. Construct Circuit 2C in LTspice.
+2. Apply:
+
+   * VDD = 1.2 V
+   * VG1 = 1.12 V
+   * VG2 = 0.56 V
+   * VG3 = 0.61 V
+3. Add simulation directive:
+
+   ```spice
+   .op
+   ```
+4. Verify:
+
+   * Node voltages
+   * Drain current
+   * Saturation conditions
+
+Result:
+
+```text
+ID ≈ 200 µA
+```
+---
+<img width="1233" height="837" alt="Screenshot 2026-06-02 091624" src="https://github.com/user-attachments/assets/5f93d362-6558-4fbf-b5e8-50e24cab1fd1" />
+---
+
+## 2. Transient Analysis
+
+### Objective
+
+Measure time-domain amplification and waveform stability.
+
+### Procedure
+
+1. Apply sinusoidal input:
+
+   ```spice
+   SINE(1.12 10m 1k)
+   ```
+2. Add directive:
+
+   ```spice
+   .trans 0 5m 0 1u
+   ```
+3. Observe:
+
+   * Input waveform
+   * Output waveform
+   * Peak-to-peak voltage gain
+
+---
+<img width="1233" height="687" alt="Screenshot 2026-06-02 093254" src="https://github.com/user-attachments/assets/e3436762-8db6-4fda-8963-1091e30a10ec" />
+
+---
+## 3. AC Analysis
+
+### Objective
+
+Determine gain and frequency response.
+
+### Procedure
+
+1. Configure input source:
+
+   ```spice
+   AC 1
+   ```
+2. Add AC sweep:
+
+   ```spice
+   .ac dec 100 10 100G
+   ```
+3. Plot:
+
+   * Gain
+   * Bandwidth
+   * Frequency response
+
+---
+<img width="1234" height="675" alt="Screenshot 2026-06-02 093316" src="https://github.com/user-attachments/assets/4ce34ad6-e4ab-4afe-9385-f19ef8a7f68c" />
+---
+
+# Results
+
+| Parameter            | Value     |
+| :------------------- | :-------- |
+| Drain Current        | ≈ 200 µA  |
+| Optimized NMOS Width | 33.567 µm |
+| Optimized PMOS Width | 49.6 µm   |
+| Voltage Gain (Av)    | 10.18 V/V |
+| Gain in dB           | 20.154 dB |
+
+---
+
+# Inference
+
+* Circuit 3 provides the highest practical midband gain of approximately 18.6 dB.
+* Circuit 3 achieves the highest unity gain bandwidth (UGB).
+* Diode-connected loads reduce gain but simplify transistor biasing.
+* A clear gain-bandwidth trade-off is observed across amplifier configurations.
+* Simulation results validate the behavior of 180 nm CMOS analog amplifier design principles.
+
