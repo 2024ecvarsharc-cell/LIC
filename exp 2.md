@@ -697,3 +697,4 @@ load capacitor, the amplifier behaves as a stable low-pass system exhibiting ban
 The circuit therefore demonstrates strong high-frequency performance suitable for moderate-speed analog signal processing applications.
 
 ---
+
