@@ -502,44 +502,6 @@ UGB ≈ 285.63 MHz
 
 ---
 
-# Result
-
-## DC Analysis
-
-All transistors operate in saturation with ID ≈ 200 µA.
-
-## Transient Analysis
-
-Simulated Gain ≈ 2.094 V/V  
-Gain ≈ 6.421 dB  
-
-## AC Analysis
-
-Theoretical Gain ≈ 0.45 V/V  
-Gain ≈ -6.935 dB  
-Bandwidth ≈ 136.405 MHz  
-
----
-
-# Inference
-
-The practical gain obtained from simulation is higher than the theoretical gain calculated using the simplified small-signal formula.
-
-The difference occurs due to:
-
-- Approximate small-signal modeling  
-- Output resistance estimation (ro1 || ro3 approximation)  
-- Bias point variations  
-- Device parasitic effects  
-- Simulation using accurate transistor models  
-
-AC analysis assumes small-signal conditions, while transient analysis reflects practical large-signal behavior.
-
-The cascode structure improves frequency response and provides stable operation with moderate gain and high bandwidth.
-
----
-
-
 ## Simulation Protocols
 
 ### 1. DC Analysis
@@ -722,5 +684,44 @@ load capacitor, the amplifier behaves as a stable low-pass system exhibiting ban
 ```
 
 The circuit therefore demonstrates strong high-frequency performance suitable for moderate-speed analog signal processing applications.
+
+---
+
+# Result
+
+## DC Analysis
+
+All transistors operate in saturation with ID ≈ 200 µA.
+
+## Transient Analysis
+
+Simulated Gain ≈ 2.094 V/V  
+Gain ≈ 6.421 dB  
+
+## AC Analysis
+
+Theoretical Gain ≈ 0.45 V/V  
+Gain ≈ -6.935 dB  
+Bandwidth ≈ 136.405 MHz  
+
+---
+
+# Inference
+
+The practical gain obtained from simulation is higher than the theoretical gain calculated using the simplified small-signal formula.
+
+The difference occurs due to:
+
+- Approximate small-signal modeling  
+- Output resistance estimation (ro1 || ro3 approximation)  
+- Bias point variations  
+- Device parasitic effects  
+- Simulation using accurate transistor models  
+
+AC analysis assumes small-signal conditions, while transient analysis reflects practical large-signal behavior.
+
+The cascode structure improves frequency response and provides stable operation with moderate gain and high bandwidth.
+
+---
 
 
