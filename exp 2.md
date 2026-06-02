@@ -382,12 +382,19 @@ W3 = 44.813 µm
 
 ---
 
+<img width="1465" height="854" alt="Screenshot 2026-06-02 083402" src="https://github.com/user-attachments/assets/9c7b55c1-6981-4bbc-8482-3697e507dc6e" />
+
+
+---
+
 # DC Analysis
 
 ## Objective
 
 To verify that all transistors operate in saturation region and to obtain the DC operating point.
 
+---
+<img width="790" height="597" alt="Screenshot 2026-06-02 083423" src="https://github.com/user-attachments/assets/0dad9b4f-cf75-444e-bb5d-52bee418c520" />
 ---
 
 ## Procedure
@@ -418,6 +425,8 @@ Measured:
 
 ΔVin = 20 mV  
 
+---
+<img width="1857" height="365" alt="Screenshot 2026-06-02 083442" src="https://github.com/user-attachments/assets/09f5a625-a4f5-49c4-a183-fd6cdeceef25" />
 ---
 
 ## Voltage Gain
@@ -500,6 +509,8 @@ UGB = 2.094 × 136.405
 
 UGB ≈ 285.63 MHz  
 
+---
+<img width="1888" height="638" alt="Screenshot 2026-06-02 083523" src="https://github.com/user-attachments/assets/957fc6a0-8776-4df0-b2a2-9bf0197426ea" />
 ---
 
 ## Simulation Protocols
